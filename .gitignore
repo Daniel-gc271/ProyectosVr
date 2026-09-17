@@ -1,0 +1,35 @@
+# Ignora las carpetas generadas automáticamente dentro de cualquier subcarpeta inmediata
+/*/Library/
+/*/Logs/
+/*/Obj/
+/*/MemoryCaptures/
+/*/Build/
+/*/Builds/
+/*/[Bb]in/
+
+# Ignora archivos temporales y de configuración de editores en cualquier subcarpeta
+/*/*.csproj
+/*/*.unityproj
+/*/*.sln
+/*/*.suo
+/*/*.tmp
+/*/*.user
+/*/*.userprefs
+/*/*.pidb
+/*/*.bkgen
+/*/*.json
+
+# ==========================================
+# EXCEPCIONES CRÍTICAS (Aseguran que Unity funcione)
+# ==========================================
+# NUNCA ignores los archivos .meta ni la carpeta Assets
+!/*/Assets/
+!/**/*.meta
+
+# ==========================================
+# ARCHIVOS GLOBALES DEL SISTEMA O IDEs
+# ==========================================
+.idea/
+.vs/
+.DS_Store
+Thumbs.db
