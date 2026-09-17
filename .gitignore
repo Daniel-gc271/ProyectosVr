@@ -1,34 +1,39 @@
-# Ignora las carpetas generadas automáticamente dentro de cualquier subcarpeta inmediata
-/*/Library/
-/*/Logs/
-/*/Obj/
-/*/MemoryCaptures/
-/*/Build/
-/*/Builds/
-/*/[Bb]in/
+# ==========================================
+# REGLA TOTALMENTE UNIVERSAL PARA UNITY (Cualquier nivel)
+# ==========================================
 
-# Ignora archivos temporales y de configuración de editores en cualquier subcarpeta
-/*/*.csproj
-/*/*.unityproj
-/*/*.sln
-/*/*.suo
-/*/*.tmp
-/*/*.user
-/*/*.userprefs
-/*/*.pidb
-/*/*.bkgen
-/*/*.json
+# El doble asterisco (**/) busca estas carpetas sin importar a qué profundidad estén
+**/[Ll]ibrary/
+**/[Ll]ogs/
+**/[Oo]bj/
+**/[Mm]emoryCaptures/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/[Bb]in/
+
+# Ignora archivos temporales y de configuración de IDES/Editores en cualquier nivel
+**/*.csproj
+**/*.unityproj
+**/*.sln
+**/*.slnx
+**/*.suo
+**/*.tmp
+**/*.user
+**/*.userprefs
+**/*.pidb
+**/*.bkgen
+**/*.json
+# Ignorar mapas de cubos de texturas pesados que superan el límite de GitHub
+*.cubemap
 
 # ==========================================
 # EXCEPCIONES CRÍTICAS (Aseguran que Unity funcione)
 # ==========================================
-# NUNCA ignores los archivos .meta ni la carpeta Assets
-!/*/Assets/
-!/**/*.meta
+# Nunca ignores los archivos .meta ni tus preciados Assets
+!**/Assets/
+!**/*.meta
 
-# ==========================================
-# ARCHIVOS GLOBALES DEL SISTEMA O IDEs
-# ==========================================
+# Archivos globales ocultos del sistema operativo
 .idea/
 .vs/
 .DS_Store
