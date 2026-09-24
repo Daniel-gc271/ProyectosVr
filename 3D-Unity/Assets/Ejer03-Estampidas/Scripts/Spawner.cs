@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
-{
-    [Header("Configuración del Prefab")]
-    [SerializeField] private GameObject prefabToSpawn;
+public class Spawner : MonoBehaviour {
+    [Header("Configuración de Prefabs")]
+    // Cambiamos 'GameObject' por un array 'GameObject[]' para aceptar múltiples prefabs
+    [SerializeField] private GameObject[] prefabsToSpawn;
     [SerializeField] private string spawnerTag = "Spawner";
 
     [Header("Configuración del Tiempo")]
@@ -17,7 +17,8 @@ public class Spawner : MonoBehaviour
         // Intentar encontrar el objeto Spawner en la escena por su Tag
         GameObject spawnerObject = GameObject.FindWithTag(spawnerTag);
 
-        if (spawnerObject != null && prefabToSpawn != null)
+        // Verificamos que se haya encontrado el spawner y que el array tenga al menos 1 prefab
+        if (spawnerObject != null && prefabsToSpawn != null && prefabsToSpawn.Length > 0)
         {
             spawnPoint = spawnerObject.transform;
 
@@ -26,14 +27,18 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Falta asignar el Prefab o no se encontró ningún objeto con el Tag: " + spawnerTag);
+            Debug.LogWarning("Falta asignar prefabs en la lista o no se encontró ningún objeto con el Tag: " + spawnerTag);
         }
     }
 
     private void SpawnObject()
     {
-        // Instanciar el prefab en la posición y rotación del spawner
-        Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
-        Debug.Log("BarrilVa");
+        // Elegir un índice aleatorio entre 0 y el total de prefabs asignados
+        int randomIndex = Random.Range(0, prefabsToSpawn.Length);
+        GameObject selectedPrefab = prefabsToSpawn[randomIndex];
+
+        // Instanciar el prefab elegido al azar en la posición y rotación del spawner
+        Instantiate(selectedPrefab, spawnPoint.position, spawnPoint.rotation);
+        Debug.Log("Objeto generado: " + selectedPrefab.name);
     }
 }

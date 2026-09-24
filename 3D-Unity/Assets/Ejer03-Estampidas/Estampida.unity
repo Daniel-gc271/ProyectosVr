@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &12155923
+--- !u!1001 &143737025
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -131,17 +131,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Track
       objectReference: {fileID: 0}
+    - target: {fileID: 7007907321284837184, guid: 5eb87dddff9812b41a6201da77dac76e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580271896073175053, guid: 5eb87dddff9812b41a6201da77dac76e, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 1728446001687019705, guid: a0f6a23f283d1f546abe7f9c93481aa3, type: 3}
     - target: {fileID: 8261411881845797030, guid: 5eb87dddff9812b41a6201da77dac76e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.12314914
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8261411881845797030, guid: 5eb87dddff9812b41a6201da77dac76e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.49999985
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8261411881845797030, guid: 5eb87dddff9812b41a6201da77dac76e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.660372
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8261411881845797030, guid: 5eb87dddff9812b41a6201da77dac76e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -405,7 +413,7 @@ Transform:
   m_GameObject: {fileID: 731711161}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00097195245, y: -0.935678, z: 0.35284463, w: 0.0025408864}
-  m_LocalPosition: {x: -0.3498652, y: 4.3129425, z: 4.40771}
+  m_LocalPosition: {x: -0.373, y: 4.3129425, z: 4.40771}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -446,4 +454,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 729315421}
   - {fileID: 731711163}
-  - {fileID: 12155923}
+  - {fileID: 143737025}

@@ -117,9 +117,9 @@ MonoBehaviour:
   - {fileID: 8960843223950061461}
   - {fileID: 1836701733200991796}
   obstacleVariants:
-  - {fileID: 3298614384272698522, guid: d34fa3fab8f1284468c1da736474cc61, type: 3}
+  - {fileID: 3298614384272698522, guid: d60bb5a33cbb72f4e8e1c56be8e000c0, type: 3}
   - {fileID: 522672695000125104, guid: d6d367c79c5040a4a9a21c79a8341e0e, type: 3}
-  - {fileID: 6242571891645931155, guid: df2a46d31dbdb314baf1c7112ff215e7, type: 3}
+  - {fileID: 6242571891645931155, guid: bdbeaa6a82891964eb20385653f65257, type: 3}
 --- !u!114 &3951613903009800084
 MonoBehaviour:
   m_ObjectHideFlags: 0

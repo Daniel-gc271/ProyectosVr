@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RandomBarrelBarrierBuilder : MonoBehaviour
+public class RandomBarrierBuilder : MonoBehaviour
 {
     [Header("Puntos de Anclaje")]
     [SerializeField] private Transform[] spawnPositions; // Posiciones hijas en la barrera
