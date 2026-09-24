@@ -13,6 +13,7 @@ public class RandomBarrierBuilder : MonoBehaviour
         BuildBarrier();
     }
 
+    
     private void BuildBarrier()
     {
         if (obstacleVariants.Length == 0 || spawnPositions.Length == 0) return;

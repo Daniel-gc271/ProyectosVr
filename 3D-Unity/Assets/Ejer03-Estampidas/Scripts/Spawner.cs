@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour {
             Debug.LogWarning("Falta asignar prefabs en la lista o no se encontró ningún objeto con el Tag: " + spawnerTag);
         }
     }
-
+    [ContextMenu("Generar Barrera")]
     private void SpawnObject()
     {
         // Elegir un índice aleatorio entre 0 y el total de prefabs asignados
