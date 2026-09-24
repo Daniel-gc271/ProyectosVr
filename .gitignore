@@ -1,40 +1,30 @@
-# ==========================================
-# REGLA TOTALMENTE UNIVERSAL PARA UNITY (Cualquier nivel)
-# ==========================================
+# =========================================================================
+# GITIGNORE PARA PROYECTO DE VR (UNITY 6) CON EJERCICIOS INDEPENDIENTES
+# =========================================================================
 
-# El doble asterisco (**/) busca estas carpetas sin importar a qué profundidad estén
+# 1. Ignorar carpetas temporales críticas de Unity (¡Imprescindible!)
 **/[Ll]ibrary/
-**/[Ll]ogs/
+**/[Tt]emp/
 **/[Oo]bj/
-**/[Mm]emoryCaptures/
 **/[Bb]uild/
 **/[Bb]uilds/
-**/[Bb]in/
-
-# Ignora archivos temporales y de configuración de IDES/Editores en cualquier nivel
+**/[Ll]ogs/
+**/.vs/
+**/.vscode/
 **/*.csproj
-**/*.unityproj
 **/*.sln
 **/*.slnx
-**/*.suo
-**/*.tmp
-**/*.user
-**/*.userprefs
-**/*.pidb
-**/*.bkgen
-**/*.json
-# Ignorar mapas de cubos de texturas pesados que superan el límite de GitHub
-*.cubemap
 
-# ==========================================
-# EXCEPCIONES CRÍTICAS (Aseguran que Unity funcione)
-# ==========================================
-# Nunca ignores los archivos .meta ni tus preciados Assets
-!**/Assets/
-!**/*.meta
+# 2. Ignorar el contenido por defecto de la plantilla de Unity en la raíz
+**/Assets/Settings/
+**/Assets/TutorialInfo/
+**/Assets/InputSystem*
+**/Assets/Readme*
 
-# Archivos globales ocultos del sistema operativo
-.idea/
-.vs/
-.DS_Store
-Thumbs.db
+# 3. Asegurar que SÍ se guarden tus carpetas de ejercicios y sus metadatos
+!**/Assets/E*/
+!**/Assets/E*/
+
+# 4. Forzar que se suban los archivos de configuración global del proyecto
+# (Sin esto, la configuración de VR, físicas y botones no se sincronizará)
+!**/ProjectSettings/
