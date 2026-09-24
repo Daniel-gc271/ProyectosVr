@@ -22,8 +22,8 @@
 **/Assets/Readme*
 
 # 3. Asegurar que SÍ se guarden tus carpetas de ejercicios y sus metadatos
-!**/Assets/E*/
-!**/Assets/E*/
+!**/Assets/Ej*/
+!**/Assets/Ej*/
 
 # 4. Forzar que se suban los archivos de configuración global del proyecto
 # (Sin esto, la configuración de VR, físicas y botones no se sincronizará)
