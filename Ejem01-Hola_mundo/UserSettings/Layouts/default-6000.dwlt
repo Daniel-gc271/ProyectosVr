@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 95
+  controlID: 37
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -643,7 +643,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Ejer03-Estampidas/Scripts
+    - Assets/Ejem03-Colisiones/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -653,27 +653,23 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Ejer03-Estampidas/Scripts
+  - Assets/Ejem03-Colisiones/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\2DAM\realidad_virtual\ProyectosVr\Ejem01-Hola_mundo
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 66}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_rawData: 568105584918812064
+    - m_rawData: 568105584918812148
     m_LastClickedID:
-      m_rawData: 568105584918812064
+      m_rawData: 568105584918812148
     m_ExpandedIDs:
-    - m_rawData: 568105589213755764
+    - m_rawData: 568105589213755780
     - m_rawData: 0
-    - m_rawData: 568105584918811970
-    - m_rawData: 568105584918811972
-    - m_rawData: 568105584918812060
-    - m_rawData: 568105584918812720
-    - m_rawData: 568105584918812756
-    - m_rawData: 568105584918812762
+    - m_rawData: 568105584918812056
+    - m_rawData: 568105584918812058
     - m_rawData: 568105587066273791
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -708,8 +704,9 @@ MonoBehaviour:
       m_rawData: 0
     m_ExpandedIDs:
     - m_rawData: 0
-    - m_rawData: 568105584918811970
-    - m_rawData: 568105584918811972
+    - m_rawData: 568105584918812056
+    - m_rawData: 568105584918812058
+    - m_rawData: 568105584918812060
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -738,10 +735,10 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_rawData: 568105589213755634
+    - m_rawData: 568105584918811806
     m_LastClickedEntityId:
-      m_rawData: 568105589213755634
-    m_HadKeyboardFocusLastEvent: 0
+      m_rawData: 568105584918811806
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_rawData: 568105584918858096
     m_RenameOverlay:
@@ -872,11 +869,10 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_rawData: 568105589213755634
+      - m_rawData: 568105584918811806
       m_LastClickedID:
-        m_rawData: 568105589213755634
+        m_rawData: 0
       m_ExpandedIDs:
-      - m_rawData: 568105589213755634
       - m_rawData: 568105589213756086
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1485,11 +1481,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.0062539196, y: 0.9401466, z: -0.34042343, w: -0.017228512}
     speed: 2
-    m_Value: {x: -0.006232934, y: 0.9405076, z: -0.3392781, w: -0.017235145}
+    m_Value: {x: -0.006253919, y: 0.9401466, z: -0.34042343, w: -0.017228512}
   m_Size:
     m_Target: 20.21903
     speed: 2
-    m_Value: 21.171759
+    m_Value: 20.21903
   m_Ortho:
     m_Target: 0
     speed: 2
