@@ -1,8 +1,8 @@
 # =========================================================================
-# GITIGNORE PARA PROYECTO DE VR (UNITY 6) CON EJERCICIOS INDEPENDIENTES
+# GITIGNORE AUTOMÁTICO - SOLO SUBE EJERCICIOS Y CONFIGURACIONES
 # =========================================================================
 
-# 1. Ignorar carpetas temporales críticas de Unity (¡Imprescindible!)
+# 1. Ignorar carpetas temporales globales de Unity y del sistema
 **/[Ll]ibrary/
 **/[Tt]emp/
 **/[Oo]bj/
@@ -11,20 +11,23 @@
 **/[Ll]ogs/
 **/.vs/
 **/.vscode/
-**/*.csproj
-**/*.sln
-**/*.slnx
+*.csproj
+*.sln
+*.slnx
 
-# 2. Ignorar el contenido por defecto de la plantilla de Unity en la raíz
-**/Assets/Settings/
-**/Assets/TutorialInfo/
-**/Assets/InputSystem*
-**/Assets/Readme*
+# 2. LA MAGIA: Ignorar por defecto TODO lo que entre en la carpeta Assets
+**/Assets/*
 
-# 3. Asegurar que SÍ se guarden tus carpetas de ejercicios y sus metadatos
-!**/Assets/Ej*/
-!**/Assets/Ej*/
+# 3. EXCEPCIONES: Forzar a Git a rastrear únicamente tus carpetas de ejercicios
+# (El signo ! significa "No ignores esto")
+!**/Assets/Ejem*/
+!**/Assets/Ejer*/
+!**/Assets/Ejercicio*/
 
-# 4. Forzar que se suban los archivos de configuración global del proyecto
-# (Sin esto, la configuración de VR, físicas y botones no se sincronizará)
+# 4. Asegurar que se suban los metadatos (.meta) de tus carpetas permitidas
+!**/Assets/Ejem*/**
+!**/Assets/Ejer*/**
+!**/Assets/Ejercicio*/**
+
+# 5. Forzar que se suban los ajustes globales de Unity (Botones, VR, Físicas...)
 !**/ProjectSettings/
