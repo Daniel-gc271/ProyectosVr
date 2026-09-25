@@ -62,7 +62,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9010414587696313762}
-  - component: {fileID: 1007147152113723146}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
@@ -85,24 +84,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8261411881845797030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1007147152113723146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2546743420553827403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072310f0129d9784d8323eeddc64464f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  prefabsToSpawn:
-  - {fileID: 1728446001687019705, guid: a0f6a23f283d1f546abe7f9c93481aa3, type: 3}
-  - {fileID: 6685969085600248050, guid: 99ee22fe2d9435e43a76993c44dc75b6, type: 3}
-  spawnerTag: Spawner
-  startDelay: 1
-  spawnInterval: 2
 --- !u!1 &5609441875619083681
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +96,7 @@ GameObject:
   - component: {fileID: 8656471481368891562}
   - component: {fileID: 495355073469600685}
   - component: {fileID: 6932783391874507503}
+  - component: {fileID: 1303966192444668857}
   m_Layer: 0
   m_Name: Track
   m_TagString: Untagged
@@ -172,7 +154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1befd93b0362d3840b97695d5232dce8, type: 2}
+  - {fileID: 2100000, guid: 6f7420e76d26fab44af64ac78ebe5d27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,3 +200,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1303966192444668857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5609441875619083681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072310f0129d9784d8323eeddc64464f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spawner
+  prefabsToSpawn:
+  - {fileID: 1728446001687019705, guid: a0f6a23f283d1f546abe7f9c93481aa3, type: 3}
+  - {fileID: 6685969085600248050, guid: 99ee22fe2d9435e43a76993c44dc75b6, type: 3}
+  spawnerObject: {fileID: 2546743420553827403}
+  startDelay: 1
+  spawnInterval: 2
+  randomVariance: 1

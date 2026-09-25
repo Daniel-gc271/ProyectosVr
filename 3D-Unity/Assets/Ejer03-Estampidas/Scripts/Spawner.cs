@@ -1,44 +1,77 @@
 using UnityEngine;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : MonoBehaviour
+{
     [Header("Configuración de Prefabs")]
-    // Cambiamos 'GameObject' por un array 'GameObject[]' para aceptar múltiples prefabs
     [SerializeField] private GameObject[] prefabsToSpawn;
-    [SerializeField] private string spawnerTag = "Spawner";
+
+    [Header("Punto de Generación")]
+    [Tooltip("Objeto vacío que servirá como punto de origen. Si se deja vacío, usará este mismo transform.")]
+    [SerializeField] private GameObject spawnerObject;
 
     [Header("Configuración del Tiempo")]
-    [SerializeField] private float startDelay = 0f;     // Cuánto tarda en salir el primer objeto
-    [SerializeField] private float spawnInterval = 3f;  // Cada cuántos segundos se repite
+    [SerializeField] private float startDelay = 0f;        // Tiempo inicial antes del primer spawn
+    [SerializeField] private float spawnInterval = 3f;     // Tiempo base entre spawns
+    [SerializeField] private float randomVariance = 1f;    // Margen de aleatoriedad (± segundos)
 
     private Transform spawnPoint;
+    private float timer;
+    private bool isReadyToSpawn;
 
     private void Start()
     {
-        // Intentar encontrar el objeto Spawner en la escena por su Tag
-        GameObject spawnerObject = GameObject.FindWithTag(spawnerTag);
+        // Asignar el punto de generación
+        spawnPoint = spawnerObject != null ? spawnerObject.transform : transform;
 
-        // Verificamos que se haya encontrado el spawner y que el array tenga al menos 1 prefab
-        if (spawnerObject != null && prefabsToSpawn != null && prefabsToSpawn.Length > 0)
+        // Comprobación de seguridad
+        if (prefabsToSpawn == null || prefabsToSpawn.Length == 0)
         {
-            spawnPoint = spawnerObject.transform;
-
-            // Llama a la función "SpawnObject" repetidamente
-            InvokeRepeating(nameof(SpawnObject), startDelay, spawnInterval);
+            Debug.LogWarning($"[Spawner] Falta asignar prefabs en el objeto {gameObject.name}.");
+            enabled = false; // Desactiva el Update si no hay prefabs
+            return;
         }
-        else
+
+        // El primer temporizador usa el retraso inicial (startDelay)
+        timer = startDelay;
+        isReadyToSpawn = true;
+    }
+
+    private void Update()
+    {
+        if (!isReadyToSpawn) return;
+
+        // Restamos el tiempo transcurrido desde el último frame
+        timer -= Time.deltaTime;
+
+        // Cuando el temporizador llega a cero
+        if (timer <= 0f)
         {
-            Debug.LogWarning("Falta asignar prefabs en la lista o no se encontró ningún objeto con el Tag: " + spawnerTag);
+            SpawnObject();
+            SetNextSpawnTime();
         }
     }
-    [ContextMenu("Generar Barrera")]
+
+    private void SetNextSpawnTime()
+    {
+        // Calcula un tiempo aleatorio entre (intervalo - variación) y (intervalo + variación)
+        float minTime = Mathf.Max(0.1f, spawnInterval - randomVariance);
+        float maxTime = spawnInterval + randomVariance;
+
+        timer = Random.Range(minTime, maxTime);
+    }
+
     private void SpawnObject()
     {
-        // Elegir un índice aleatorio entre 0 y el total de prefabs asignados
+        if (prefabsToSpawn == null || prefabsToSpawn.Length == 0) return;
+
+        Transform targetTransform = spawnPoint != null ? spawnPoint : transform;
+
+        // Seleccionar prefab aleatorio
         int randomIndex = Random.Range(0, prefabsToSpawn.Length);
         GameObject selectedPrefab = prefabsToSpawn[randomIndex];
 
-        // Instanciar el prefab elegido al azar en la posición y rotación del spawner
-        Instantiate(selectedPrefab, spawnPoint.position, spawnPoint.rotation);
+        // Instanciar
+        Instantiate(selectedPrefab, targetTransform.position, targetTransform.rotation);
         Debug.Log("Objeto generado: " + selectedPrefab.name);
     }
 }
