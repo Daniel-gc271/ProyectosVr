@@ -60,6 +60,7 @@ public class Spawner : MonoBehaviour
         timer = Random.Range(minTime, maxTime);
     }
 
+    [ContextMenu("Generar Objeto")]
     private void SpawnObject()
     {
         if (prefabsToSpawn == null || prefabsToSpawn.Length == 0) return;
