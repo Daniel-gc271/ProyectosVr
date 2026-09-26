@@ -20,12 +20,15 @@ public class RandomBarrierBuilder : MonoBehaviour
 
         foreach (Transform point in spawnPositions)
         {
-            // Seleccionar una variante aleatoria para cada punto
+            // 1. Seleccionar variante aleatoria
             int randomIndex = Random.Range(0, obstacleVariants.Length);
             GameObject selectedVariant = obstacleVariants[randomIndex];
 
-            // Instanciar como hijo del punto correspondiente
-            Instantiate(selectedVariant, point.position, point.rotation, point);
+            // 2. Definir los ángulos en grados (Vector3)
+            Vector3 randomRotationVector = new Vector3(0f, Random.Range(-45f, 45f), 0f);
+
+            // 3. Pasar el Vector3 convertido mediante Quaternion.Euler en el Instantiate
+            Instantiate(selectedVariant, point.position,/*point.rotation*/ Quaternion.Euler(randomRotationVector), point);
         }
     }
 }
