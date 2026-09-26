@@ -73,6 +73,6 @@ public class Spawner : MonoBehaviour
 
         // Instanciar
         Instantiate(selectedPrefab, targetTransform.position, targetTransform.rotation);
-        Debug.Log("Objeto generado: " + selectedPrefab.name);
+        //Debug.Log("Objeto generado: " + selectedPrefab.name);
     }
 }

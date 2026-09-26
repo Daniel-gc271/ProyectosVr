@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1303966192444668857}
   m_Layer: 0
   m_Name: Track
-  m_TagString: Untagged
+  m_TagString: Track
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 1, z: 2}
+  m_LocalScale: {x: 0.25, y: 1, z: 2.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9010414587696313762}
@@ -216,6 +216,6 @@ MonoBehaviour:
   - {fileID: 1728446001687019705, guid: a0f6a23f283d1f546abe7f9c93481aa3, type: 3}
   - {fileID: 6685969085600248050, guid: 99ee22fe2d9435e43a76993c44dc75b6, type: 3}
   spawnerObject: {fileID: 2546743420553827403}
-  startDelay: 1
+  startDelay: 0
   spawnInterval: 2
   randomVariance: 1
