@@ -2,18 +2,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    /*
-     * Problema: puntuacion multiple durante parabola de salto horizontal
-     * solucion: usar un temporizador que calcule el tiempo restante para aterrizar.
-     * al saltar el jugador tocara el trigger que puntua, sumara uno a la puntuacion
-     * posteriormente bloqueara la capacidad de obtener puntuacion hasta aterrizar
-     *
-     */
     private int puntuacionTotal = 0;
-    private float airTimer = 0f; // Temporizador dinámico en el aire
-    private bool hasScoredInCurrentJump = false; // Bloquea múltiples puntos en un mismo salto
+    private float airTimer = 0f;
+    private bool hasScoredInCurrentJump = false;
+
     [Header("Referencias OBLIGATORIAS")]
-    [SerializeField] private Rigidbody rb; // Asignar desde el Inspector
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Animator animator;
+    [SerializeField] private CapsuleCollider playerCollider;
 
     [Header("Configuración Inicial")]
     [SerializeField] private Vector3 initialPosition = new Vector3(0f, 0.7f, 8.5f);
@@ -24,7 +20,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private string trackTag = "Track";
 
     [Header("Física del Salto")]
-    [SerializeField] private float jumpHeight = 2.5f; // Altura máxima del salto / arco (H)
+    [SerializeField] private float jumpHeight = 2.5f;
+
+    [Header("Mecánica de Rodar (Roll)")]
+    [SerializeField] private float rollDuration = 0.8f;
+    [SerializeField] private float rollColliderHeight = 1f;
+    private float originalColliderHeight;
+    private Vector3 originalColliderCenter;
+    private float rollTimer = 0f;
+    private bool isRolling = false;
 
     private float minXLimit;
     private float maxXLimit;
@@ -33,20 +37,26 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        // 1. Validar la referencia del Rigidbody
         if (rb == null)
         {
-            Debug.LogError($"[PlayerController] ERROR: No se ha asignado el componente 'Rigidbody' en el Inspector. El juego no se ejecutará.");
+            Debug.LogError($"[PlayerController] ERROR: No se ha asignado el 'Rigidbody' en el Inspector.");
             isValidSetup = false;
             enabled = false;
             return;
         }
 
-        // 2. Asignar transformación inicial
+        if (animator == null) animator = GetComponentInChildren<Animator>();
+        if (playerCollider == null) playerCollider = GetComponent<CapsuleCollider>();
+
+        if (playerCollider != null)
+        {
+            originalColliderHeight = playerCollider.height;
+            originalColliderCenter = playerCollider.center;
+        }
+
         transform.position = initialPosition;
         transform.localScale = initialScale;
 
-        // 3. Validar pistas y límites de carril
         CalculateTrackLimits();
     }
 
@@ -55,11 +65,9 @@ public class PlayerController : MonoBehaviour
         GameObject[] tracks = GameObject.FindGameObjectsWithTag(trackTag);
         int trackCount = tracks.Length;
 
-        // Validar si la cantidad de pistas es cero o PAR
         if (trackCount == 0 || trackCount % 2 == 0)
         {
-            Debug.LogError($"[PlayerController] ERROR: Se requiere un número IMPAR de objetos con la etiqueta '{trackTag}'. " +
-                           $"Actualmente hay {trackCount} pistas. El juego no se ejecutará.");
+            Debug.LogError($"[PlayerController] ERROR: Se requiere un número IMPAR de pistas. Pistas actuales: {trackCount}");
             isValidSetup = false;
             enabled = false;
             return;
@@ -76,18 +84,41 @@ public class PlayerController : MonoBehaviour
     {
         if (!isValidSetup) return;
 
-        // Descontar el tiempo de aire frame a frame
+        // 1. Temporizador de aire
         if (airTimer > 0f)
         {
             airTimer -= Time.deltaTime;
         }
 
-        // Solo permitir acciones de salto/desplazamiento si el personaje está en el suelo
+        // 2. Temporizador de rodado
+        if (isRolling)
+        {
+            rollTimer -= Time.deltaTime;
+            if (rollTimer <= 0f)
+            {
+                StopRoll();
+            }
+        }
+
+        // 3. DETECCIÓN DE CAÍDA (Cuando la velocidad Y empieza a ser negativa en el aire)
+        if (!isGrounded && rb.linearVelocity.y < -0.1f)
+        {
+            if (animator != null)
+            {
+                animator.SetBool("IsFalling", true);
+            }
+        }
+
+        // 4. Lectura de controles solo en el suelo
         if (isGrounded)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W) && !isRolling)
             {
                 JumpVertical();
+            }
+            else if (Input.GetKeyDown(KeyCode.S) && !isRolling)
+            {
+                StartRoll();
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
@@ -102,76 +133,105 @@ public class PlayerController : MonoBehaviour
 
     private void JumpVertical()
     {
-        // Aplica el salto con desplazamiento cero en el eje X
+        TriggerJumpAnimation();
         ApplyParabolicImpulse(0f, jumpHeight);
+    }
+
+    private void StartRoll()
+    {
+        isRolling = true;
+        rollTimer = rollDuration;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Roll");
+        }
+
+        if (playerCollider != null)
+        {
+            playerCollider.height = rollColliderHeight;
+            playerCollider.center = new Vector3(originalColliderCenter.x, rollColliderHeight / 2f, originalColliderCenter.z);
+        }
+    }
+
+    private void StopRoll()
+    {
+        isRolling = false;
+
+        if (playerCollider != null)
+        {
+            playerCollider.height = originalColliderHeight;
+            playerCollider.center = originalColliderCenter;
+        }
     }
 
     private void TryMoveLane(float directionStep)
     {
         float targetX = transform.position.x + directionStep;
 
-        // Comprobar si el carril objetivo está dentro de los límites
         if (targetX < minXLimit - 0.1f || targetX > maxXLimit + 0.1f) return;
 
-        // Executar salto parabólico lateral
+        if (isRolling) StopRoll();
+
+        TriggerJumpAnimation();
         ApplyParabolicImpulse(directionStep, jumpHeight);
+    }
+
+    private void TriggerJumpAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Jump");
+            animator.SetBool("IsGrounded", false);
+            animator.SetBool("IsFalling", false);
+        }
     }
 
     private void ApplyParabolicImpulse(float distanceX, float height)
     {
         float gravity = Mathf.Abs(Physics.gravity.y);
 
-        // 1. Velocidad inicial necesaria en Y para alcanzar la altura 'height'
         float vy = Mathf.Sqrt(2f * gravity * height);
-
-        // 2. Tiempo total de vuelo (subida + bajada)
         float totalTime = 2f * vy / gravity;
-
-        // 3. Velocidad horizontal necesaria en X
         float vx = distanceX / totalTime;
 
-        // Aplicar la velocidad al Rigidbody asignado
         rb.linearVelocity = new Vector3(vx, vy, 0f);
         isGrounded = false;
 
-        airTimer = totalTime; // Setear el tiempo exacto que durará el salto
-        hasScoredInCurrentJump = false; // Permitimos 1 punto para este nuevo salto
+        airTimer = totalTime;
+        hasScoredInCurrentJump = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Detectar contacto con la pista o superficie horizontal
         if (collision.gameObject.CompareTag(trackTag) || collision.contacts[0].normal.y > 0.5f)
         {
             isGrounded = true;
 
-            // Detener la velocidad residual al colisionar con el suelo para fijar la posición
+            if (animator != null)
+            {
+                animator.SetBool("IsGrounded", true);
+                animator.SetBool("IsFalling", false);
+            }
+
             rb.linearVelocity = Vector3.zero;
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        // Verifica si el objeto con el que chocó tiene la etiqueta "Obstacle"
         if (other.CompareTag("Obstacle"))
         {
             Debug.Log($"Objeto tocado: {other.gameObject.name}");
         }
-        else
+        else if (other.CompareTag("ScoreZone"))
         {
-            // Logica de puntuacion
-            if (other.CompareTag("ScoreZone")) // O la etiqueta que le asignes al cubo blanco
+            if (airTimer > 0f && !hasScoredInCurrentJump)
             {
-                // Solo puntúa si el tiempo de aire sigue activo Y no ha puntuado ya en este salto
-                if (airTimer > 0f && !hasScoredInCurrentJump)
-                {
-                    puntuacionTotal++;
-                    hasScoredInCurrentJump = true; // Bloquea más puntos hasta el próximo salto
-                    Debug.Log($"¡Punto conseguido!\nTienes: {puntuacionTotal} puntos");
-                    // ScoreManager.instance.AddPoint();
-                }
+                puntuacionTotal++;
+                hasScoredInCurrentJump = true;
+                Debug.Log($"¡Punto conseguido! Tienes: {puntuacionTotal} puntos");
             }
         }
-        
     }
-    
 }
