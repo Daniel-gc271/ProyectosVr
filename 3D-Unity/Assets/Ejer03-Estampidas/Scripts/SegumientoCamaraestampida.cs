@@ -1,18 +1,29 @@
 using UnityEngine;
 
-public class SeguimientoCamara : MonoBehaviour
+public class GameViewFlyCam : MonoBehaviour
 {
-    public Transform objetivo; // Aquí irá el muñeco
-    public Vector3 desfasaje = new Vector3(0, 5, -10); // Distancia detrás del muñeco
+    public float movementSpeed = 10f;
+    public float lookSensitivity = 2f;
 
-    void LateUpdate()
+    private float rotationX = 0f;
+    private float rotationY = 0f;
+
+    void Update()
     {
-        if (objetivo != null)
+        // Toggle camera rotation with Right Mouse Button
+        if (Input.GetMouseButton(1))
         {
-            // Actualiza la posición de la cámara sumando el desfasaje
-            transform.position = objetivo.position + desfasaje;
-            // Hace que la cámara siempre mire al muñeco
-            transform.LookAt(objetivo);
+            rotationX += Input.GetAxis("Mouse X") * lookSensitivity;
+            rotationY -= Input.GetAxis("Mouse Y") * lookSensitivity;
+            rotationY = Mathf.Clamp(rotationY, -90f, 90f);
+
+            transform.localRotation = Quaternion.Euler(rotationY, rotationX, 0b0);
+
+            // WASD Movement relative to camera facing direction
+            float moveX = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
+            float moveZ = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
+
+            transform.Translate(new Vector3(moveX, 0, moveZ));
         }
     }
 }

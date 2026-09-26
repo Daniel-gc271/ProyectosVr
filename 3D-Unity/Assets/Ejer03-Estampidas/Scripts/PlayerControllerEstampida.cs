@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    /*
+     * Problema: puntuacion multiple durante parabola de salto horizontal
+     * solucion: usar un temporizador que calcule el tiempo restante para aterrizar.
+     * al saltar el jugador tocara el trigger que puntua, sumara uno a la puntuacion
+     * posteriormente bloqueara la capacidad de obtener puntuacion hasta aterrizar
+     *
+     */
+    private int puntuacionTotal = 0;
+    private float airTimer = 0f; // Temporizador dinámico en el aire
+    private bool hasScoredInCurrentJump = false; // Bloquea múltiples puntos en un mismo salto
     [Header("Referencias OBLIGATORIAS")]
     [SerializeField] private Rigidbody rb; // Asignar desde el Inspector
 
@@ -66,20 +76,23 @@ public class PlayerController : MonoBehaviour
     {
         if (!isValidSetup) return;
 
+        // Descontar el tiempo de aire frame a frame
+        if (airTimer > 0f)
+        {
+            airTimer -= Time.deltaTime;
+        }
+
         // Solo permitir acciones de salto/desplazamiento si el personaje está en el suelo
         if (isGrounded)
         {
-            // Salto vertical puro (Tecla W)
             if (Input.GetKeyDown(KeyCode.W))
             {
                 JumpVertical();
             }
-            // Salto parabólico a la izquierda (Tecla D)
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 TryMoveLane(-laneStep);
             }
-            // Salto parabólico a la derecha (Tecla A)
             else if (Input.GetKeyDown(KeyCode.A))
             {
                 TryMoveLane(laneStep);
@@ -114,12 +127,15 @@ public class PlayerController : MonoBehaviour
         // 2. Tiempo total de vuelo (subida + bajada)
         float totalTime = 2f * vy / gravity;
 
-        // 3. Velocidad horizontal necesaria en X (si distanceX == 0, vx será 0)
+        // 3. Velocidad horizontal necesaria en X
         float vx = distanceX / totalTime;
 
         // Aplicar la velocidad al Rigidbody asignado
         rb.linearVelocity = new Vector3(vx, vy, 0f);
         isGrounded = false;
+
+        airTimer = totalTime; // Setear el tiempo exacto que durará el salto
+        hasScoredInCurrentJump = false; // Permitimos 1 punto para este nuevo salto
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -140,5 +156,22 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log($"Objeto tocado: {other.gameObject.name}");
         }
+        else
+        {
+            // Logica de puntuacion
+            if (other.CompareTag("ScoreZone")) // O la etiqueta que le asignes al cubo blanco
+            {
+                // Solo puntúa si el tiempo de aire sigue activo Y no ha puntuado ya en este salto
+                if (airTimer > 0f && !hasScoredInCurrentJump)
+                {
+                    puntuacionTotal++;
+                    hasScoredInCurrentJump = true; // Bloquea más puntos hasta el próximo salto
+                    Debug.Log($"¡Punto conseguido!\nTienes: {puntuacionTotal} puntos");
+                    // ScoreManager.instance.AddPoint();
+                }
+            }
+        }
+        
     }
+    
 }
