@@ -674,6 +674,10 @@ PrefabInstance:
       value: Boy2
       objectReference: {fileID: 0}
     - target: {fileID: 8049280403861257176, guid: 74dfef02720bb294e92d4c70a3cae63a, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 18b482d8297fcaf46b94e96126268dca, type: 3}
+    - target: {fileID: 8049280403861257176, guid: 74dfef02720bb294e92d4c70a3cae63a, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}

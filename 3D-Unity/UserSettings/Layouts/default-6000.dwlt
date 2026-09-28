@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 43.2
+    y: 0
     width: 1536
     height: 36
   m_SerializedDataModeController:
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79.200005
+    y: 24
     width: 187
     height: 428.4
   m_SerializedDataModeController:
@@ -1297,7 +1297,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.0034918648, y: -0.9601541, z: 0.27942574, w: 0.012098048}
     speed: 2
-    m_Value: {x: 0.0034916322, y: -0.96009016, z: 0.2794071, w: 0.012097241}
+    m_Value: {x: -0.0034918648, y: 0.9601541, z: -0.27942574, w: -0.012098049}
   m_Size:
     m_Target: 22.366592
     speed: 2
@@ -1402,8 +1402,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 188
-    y: 79.200005
+    x: 189
+    y: 24
     width: 953.19995
     height: 428.4
   m_SerializedDataModeController:
@@ -1468,7 +1468,7 @@ MonoBehaviour:
       width: 953.19995
       height: 407.4
     m_Scale: {x: 1.25, y: 1.25}
-    m_Translation: {x: 476.59998, y: 203.69997}
+    m_Translation: {x: 476.59998, y: 203.69998}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -1476,7 +1476,7 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -381.27997
-      y: -162.95998
+      y: -162.95999
       width: 762.55994
       height: 325.91998
     m_MinimalGUI: 1
@@ -1510,7 +1510,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 533.60004
+    y: 478.4
     width: 1142.2
     height: 284.4
   m_SerializedDataModeController:
@@ -1562,21 +1562,19 @@ MonoBehaviour:
     m_LastClickedID:
       m_rawData: 568105584918839486
     m_ExpandedIDs:
-    - m_rawData: 568105589213753900
     - m_rawData: 0
-    - m_rawData: 568105584918839216
-    - m_rawData: 568105584918839218
-    - m_rawData: 568105584918839220
-    - m_rawData: 568105584918839222
-    - m_rawData: 568105584918839224
-    - m_rawData: 568105584918839226
-    - m_rawData: 568105584918839230
-    - m_rawData: 568105584918839232
-    - m_rawData: 568105584918839234
-    - m_rawData: 568105584918839238
-    - m_rawData: 568105584918839468
-    - m_rawData: 568105584918839490
-    - m_rawData: 568105587066273791
+    - m_rawData: 568105584918839320
+    - m_rawData: 568105584918839322
+    - m_rawData: 568105584918839324
+    - m_rawData: 568105584918839326
+    - m_rawData: 568105584918839328
+    - m_rawData: 568105584918839330
+    - m_rawData: 568105584918839332
+    - m_rawData: 568105584918839334
+    - m_rawData: 568105584918839336
+    - m_rawData: 568105584918839338
+    - m_rawData: 568105584918839340
+    - m_rawData: 568105584918839342
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1609,19 +1607,19 @@ MonoBehaviour:
     m_LastClickedID:
       m_rawData: 0
     m_ExpandedIDs:
-    - m_rawData: 568105589213753900
     - m_rawData: 0
-    - m_rawData: 568105584918839216
-    - m_rawData: 568105584918839218
-    - m_rawData: 568105584918839220
-    - m_rawData: 568105584918839222
-    - m_rawData: 568105584918839224
-    - m_rawData: 568105584918839230
-    - m_rawData: 568105584918839232
-    - m_rawData: 568105584918839234
-    - m_rawData: 568105584918839238
-    - m_rawData: 568105584918839490
-    - m_rawData: 568105587066273791
+    - m_rawData: 568105584918839320
+    - m_rawData: 568105584918839322
+    - m_rawData: 568105584918839324
+    - m_rawData: 568105584918839326
+    - m_rawData: 568105584918839328
+    - m_rawData: 568105584918839330
+    - m_rawData: 568105584918839332
+    - m_rawData: 568105584918839334
+    - m_rawData: 568105584918839336
+    - m_rawData: 568105584918839338
+    - m_rawData: 568105584918839340
+    - m_rawData: 568105584918839342
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1749,8 +1747,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1143.2001
-    y: 79.200005
+    x: 1144.2
+    y: 24
     width: 391.80005
     height: 738.8
   m_SerializedDataModeController:
