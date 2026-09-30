@@ -8,6 +8,8 @@ TagManager:
   - Deleter
   - Track
   - Obstacle
+  - ScoreZone
+  - Floor
   layers:
   - Default
   - TransparentFX
