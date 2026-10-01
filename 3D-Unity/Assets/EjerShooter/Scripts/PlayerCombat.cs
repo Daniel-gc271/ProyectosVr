@@ -5,7 +5,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Configuración de Disparo")]
     [SerializeField] private GameObject bulletPrefab; // Arrastra aquí el Prefab de la esfera
     [SerializeField] private Transform firePoint;     // Punto desde donde sale la bala (opcional, si no se asigna sale del centro de la cámara)
-    [SerializeField] private float bulletForce = 40f;  // Fuerza de propulsión de la bala 
+    [SerializeField] private float bulletForce = 340f;  // Fuerza de propulsión de la bala 
 
     [Header("Configuración de Apuntado (Zoom)")]
     [SerializeField] private float normalFOV = 60f;
